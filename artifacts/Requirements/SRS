@@ -1,0 +1,67 @@
+# Software Requirements Specification (SRS)
+
+## Project Overview
+
+The goal of this project is to provide a demo e-commerce web application (saucedemo.com) that allows users to log in, browse products, manage a shopping cart, and complete purchases.
+
+---
+
+## Functional Requirements
+
+### FR-001: User Login
+
+- The system must allow users to log in with a valid username and password.
+- The system must display an error message for invalid credentials.
+- The system must log out users and end the session securely.
+
+### FR-002: Product Catalog
+
+- Users must be able to view a list of available products after logging in.
+- Each product must display a name, image, price, and description.
+- Users must be able to sort products by name or price.
+
+### FR-003: Shopping Cart
+
+- Users must be able to add products to the shopping cart from the product list.
+- Users must be able to view the cart with all selected items, quantities, and prices.
+- Users must be able to remove items from the cart.
+
+### FR-004: Checkout Process
+
+- Users must be able to proceed to checkout from the cart.
+- The system must collect user information (first name, last name, postal code) during checkout.
+- The system must display an order summary before finalizing the purchase.
+- The system must confirm the order and display a success message after checkout.
+
+### FR-005: Logout
+
+- Users must be able to log out from any page.
+- The system must redirect users to the login page after logout.
+
+---
+
+## Non-Functional Requirements
+
+- The application must be responsive and work on desktop and mobile browsers.
+- The system must provide clear error messages for invalid actions.
+- The application must load product and cart data within 2 seconds.
+
+---
+
+## Business Rules
+
+- Only logged-in users can add products to the cart or proceed to checkout.
+- Users cannot proceed to checkout with an empty cart.
+- All required user information must be provided to complete checkout.
+
+---
+
+## Acceptance Criteria
+
+- Users can log in with valid credentials and are redirected to the products page.
+- Invalid login attempts display an appropriate error message.
+- Products are displayed with correct details and sorting options.
+- Cart operations (add, remove, view) work as expected.
+- Checkout flow completes only with all required information.
+- Successful checkout displays a confirmation message.
+- Users can log out and are redirected to the login page.

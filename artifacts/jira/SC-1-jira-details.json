@@ -1,0 +1,56 @@
+{
+  "ticket_id": "SC-1",
+  "validation": {
+    "ticket_exists": "unverified",
+    "method": "workspace_artifact_inference_only",
+    "notes": [
+      "Direct Jira API call could not be executed from the current agent toolset.",
+      "Evidence suggests SC-1 is intended/used in workflow artifacts and Jira comment script."
+    ]
+  },
+  "source_evidence": {
+    "feature_file": "artifacts/Requirements/ui_scenarios_SC-1.feature",
+    "requirements_doc": "artifacts/Requirements/SRS",
+    "jira_update_script": "artifacts/test/SC-1/post_quality_gate_update.ps1",
+    "branch_info": "STLC-Capstone/artifacts/git/SC-1/BRANCH_INFO_SC-1.md"
+  },
+  "summary": "SauceDemo shopper journey for ticket SC-1",
+  "description": "As a shopper, I want reliable login, catalog, cart, and checkout behavior so that I can complete purchases across desktop and mobile devices.",
+  "user_story": "As a shopper, I want reliable login, catalog, cart, and checkout behavior so that I can complete purchases across desktop and mobile devices.",
+  "acceptance_criteria": [
+    "Valid login redirects to products page; required-field errors are shown for missing credentials.",
+    "Authenticated session remains valid on protected page refresh.",
+    "Catalog shows name, image, description, and price for each product.",
+    "Unauthenticated access to products and checkout routes is blocked and redirected to login.",
+    "Cart item removal updates item list and badge count accurately.",
+    "Checkout from cart navigates to checkout information page when prerequisites are met.",
+    "Checkout information enforces mandatory first name, last name, and postal code.",
+    "Order can be completed from overview page and confirmation is shown; cart clears after purchase.",
+    "Core flows are usable on desktop viewport without layout breakage and with clear feedback.",
+    "Key screens load within 2 seconds under baseline test conditions."
+  ],
+  "priority": "unknown",
+  "status": "unknown",
+  "labels": [
+    "SC-1",
+    "ui",
+    "saucedemo"
+  ],
+  "attachments": [],
+  "extraction_status": {
+    "user_story": "found (from feature file)",
+    "acceptance_criteria": "found (from feature file/SRS)",
+    "description": "found (from feature file)",
+    "priority": "not found",
+    "status": "not found",
+    "labels": "partially found (feature tags)",
+    "attachments": "not found"
+  },
+  "env_validation": {
+    "JIRA_BASE_URL": "present",
+    "JIRA_EMAIL": "present",
+    "JIRA_API_TOKEN": "present",
+    "JIRA_PROJECT_KEY": "present"
+  },
+  "generated_at": "2026-06-19"
+}

@@ -1,0 +1,27 @@
+{
+  "ticket_id": "SC-1",
+  "phase": "Phase 9 - Quality Gate",
+  "agent": "Quality Gate Agent",
+  "status": "COMPLETED",
+  "generated_artifacts": [
+    "artifacts/test/SC-1/QUALITY_GATE_REPORT_SC-1.md"
+  ],
+  "validation_status": "FAILED",
+  "approval_status": "PENDING",
+  "summary": {
+    "decision": "FAIL",
+    "recommendation": "Release Rejected",
+    "metrics": {
+      "total_tests": 18,
+      "passed": 18,
+      "failed": 0,
+      "high_defects": 4,
+      "critical_defects": 0,
+      "requirement_conformance_percent": 80.0,
+      "test_case_full_coverage_percent": 81.82,
+      "traceability_percent": 100.0
+    },
+    "open_blockers": 4
+  },
+  "timestamp": "2026-06-19"
+}

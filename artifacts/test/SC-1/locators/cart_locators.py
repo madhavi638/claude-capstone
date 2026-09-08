@@ -1,0 +1,6 @@
+CART_TITLE = ".title"
+CART_ITEMS = ".cart_item"
+CART_ITEM_NAME = ".inventory_item_name"
+CART_ITEM_QUANTITY = ".cart_quantity"
+CHECKOUT_BUTTON = "[data-test='checkout']"
+CONTINUE_SHOPPING_BUTTON = "[data-test='continue-shopping']"

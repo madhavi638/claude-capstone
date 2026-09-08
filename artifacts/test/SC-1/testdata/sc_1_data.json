@@ -1,0 +1,12 @@
+{
+  "valid_username": "standard_user",
+  "valid_password": "secret_sauce",
+  "empty_username": "",
+  "empty_password": "",
+  "checkout_first": "Test",
+  "checkout_last": "User",
+  "checkout_postal": "12345",
+  "product_name_1": "Sauce Labs Backpack",
+  "product_name_2": "Sauce Labs Bike Light",
+  "product_name_3": "Sauce Labs Bolt T-Shirt"
+}

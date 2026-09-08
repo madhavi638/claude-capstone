@@ -1,0 +1,44 @@
+SC-1 Test Execution Log
+========================
+Run Date/Time : 2026-06-19T13:39:26
+Python        : 3.13.0
+pytest        : 9.1.0
+Platform      : Windows-11
+
+RESULTS
+-------
+Total     : 18
+Passed    : 18
+Failed    : 0
+Skipped   : 0
+Duration  : 75.80s
+
+TEST DETAILS
+------------
+PASS  test_login_behavior_for_valid_and_required_field_credentials[valid_credentials]
+PASS  test_login_behavior_for_valid_and_required_field_credentials[empty_username]
+PASS  test_login_behavior_for_valid_and_required_field_credentials[empty_password]
+PASS  test_authenticated_session_remains_valid_on_refresh
+PASS  test_logged_in_shopper_can_view_catalog_details
+PASS  test_unauthenticated_access_to_products_route_is_blocked
+PASS  test_remove_item_from_cart_updates_list_and_badge
+PASS  test_checkout_navigation_works_from_cart
+PASS  test_unauthenticated_user_cannot_access_checkout
+PASS  test_checkout_information_requires_mandatory_fields[valid_fields]
+PASS  test_checkout_information_requires_mandatory_fields[empty_first]
+PASS  test_checkout_information_requires_mandatory_fields[empty_last]
+PASS  test_checkout_information_requires_mandatory_fields[empty_postal]
+PASS  test_shopper_can_complete_purchase_after_valid_checkout_information
+PASS  test_stable_core_shopper_flows_are_usable_on_desktop_viewport[login]
+PASS  test_stable_core_shopper_flows_are_usable_on_desktop_viewport[catalog]
+PASS  test_stable_core_shopper_flows_are_usable_on_desktop_viewport[checkout]
+PASS  test_stable_core_shopper_flows_are_usable_on_desktop_viewport[logout]
+
+FAILURES
+--------
+None
+
+ARTIFACTS
+---------
+reports/report.html
+reports/junit.xml

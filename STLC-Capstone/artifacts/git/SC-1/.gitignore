@@ -1,0 +1,26 @@
+# Virtual Environments
+.venv/
+env/
+
+# Python Cache
+__pycache__/
+*.pyc
+.pytest_cache/
+
+# VS Code
+.vscode/
+
+# Logs
+*.log
+
+# Screenshots (optional)
+screenshots/
+
+# OS files
+.DS_Store
+Thumbs.db
+
+# Secrets
+.env
+*.env
+api-jira.env

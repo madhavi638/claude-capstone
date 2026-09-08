@@ -1,0 +1,30 @@
+{
+  "ticket_id": "SC-1",
+  "pr_number": 1,
+  "pr_url": "https://github.com/madhavi638/STLC_CapstoneAI/pull/1",
+  "source_branch": "feature/SC-1",
+  "target_branch": "main",
+  "review_status": "READY",
+  "pr_state": "open",
+  "labels": [
+    "test",
+    "automation",
+    "verification"
+  ],
+  "artifact_root": "artifacts/test/SC-1",
+  "validation": {
+    "test_scripts": true,
+    "test_data": true,
+    "execution_results": true,
+    "coverage_evidence": true,
+    "verification_reports": true,
+    "unresolved_todo_markers": false,
+    "source_branch_local": true,
+    "source_branch_remote": true,
+    "target_branch_remote": true
+  },
+  "notes": [
+    "Remote target branch main was not present and was created at commit 9a41162 via GitHub API before PR creation."
+  ],
+  "generated_on": "2026-06-17"
+}

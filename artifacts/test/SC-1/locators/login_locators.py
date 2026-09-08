@@ -1,0 +1,5 @@
+LOGIN_URL = "https://www.saucedemo.com"
+USERNAME_INPUT = "[data-test='username']"
+PASSWORD_INPUT = "[data-test='password']"
+LOGIN_BUTTON = "[data-test='login-button']"
+ERROR_CONTAINER = "[data-test='error']"

@@ -1,0 +1,21 @@
+Test Data ID,Category,Username,Password,Expected Outcome,Error Message Expected,Notes
+TD-001,Valid Credentials,standard_user,secret_sauce,Login Success — redirect to /inventory.html,,Primary happy path user
+TD-002,Valid Credentials,performance_glitch_user,secret_sauce,Login Success (with latency) — redirect to /inventory.html,,May take 2-5 seconds
+TD-003,Valid Credentials,problem_user,secret_sauce,Login Success — redirect to /inventory.html (image issues),,"Known UI issues with product images; login itself should succeed"
+TD-004,Valid Credentials,error_user,secret_sauce,Login Success — redirect to /inventory.html,,May throw JS errors on some actions
+TD-005,Valid Credentials,visual_user,secret_sauce,Login Success — redirect to /inventory.html,,Known visual/CSS issues
+TD-006,Locked Out User,locked_out_user,secret_sauce,Login Failure — remain on login page,Epic sadface: Sorry, this user has been locked out.,Blocked user account
+TD-007,Invalid Credentials,wrong_user,secret_sauce,Login Failure — remain on login page,Epic sadface: Username and password do not match any user in this service,Non-existent username
+TD-008,Invalid Credentials,standard_user,wrong_password,Login Failure — remain on login page,Epic sadface: Username and password do not match any user in this service,Wrong password for valid user
+TD-009,Invalid Credentials,wrong_user,wrong_password,Login Failure — remain on login page,Epic sadface: Username and password do not match any user in this service,Both credentials wrong
+TD-010,Empty Fields,,secret_sauce,Login Failure — remain on login page,Epic sadface: Username is required,Empty username only
+TD-011,Empty Fields,standard_user,,Login Failure — remain on login page,Epic sadface: Password is required,Empty password only
+TD-012,Empty Fields,,,Login Failure — remain on login page,Epic sadface: Username is required,Both fields empty
+TD-013,Boundary Input,"a","a",Login Failure — remain on login page,Epic sadface: Username and password do not match any user in this service,Single character inputs
+TD-014,Special Characters,"standard_user'--","secret_sauce",Login Failure — remain on login page,Epic sadface: Username and password do not match any user in this service,SQL injection attempt - should fail gracefully
+TD-015,Special Characters,"<script>alert(1)</script>","secret_sauce",Login Failure — remain on login page,Epic sadface: Username and password do not match any user in this service,XSS attempt - should fail gracefully
+TD-016,Long Input,"aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa","secret_sauce",Login Failure — remain on login page,Epic sadface: Username and password do not match any user in this service,100-char username boundary
+TD-017,Case Sensitivity,Standard_User,secret_sauce,Login Failure — remain on login page,Epic sadface: Username and password do not match any user in this service,Username is case-sensitive
+TD-018,Case Sensitivity,STANDARD_USER,SECRET_SAUCE,Login Failure — remain on login page,Epic sadface: Username and password do not match any user in this service,All uppercase
+TD-019,Whitespace," standard_user",secret_sauce,Login Failure — remain on login page,Epic sadface: Username and password do not match any user in this service,Leading space in username
+TD-020,Whitespace,"standard_user ",secret_sauce,Login Failure — remain on login page,Epic sadface: Username and password do not match any user in this service,Trailing space in username
