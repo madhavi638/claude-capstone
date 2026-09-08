@@ -71,15 +71,7 @@ class AppointmentRepository:
         offset: int = 0,
         limit: int = 20,
     ) -> list[Appointment]:
-        query = self.db.query(Appointment).filter(Appointment.patient_id == patient_id)
-        if status_filter is not None:
-            query = query.filter(Appointment.status == status_filter.value)
-        return (
-            query.order_by(Appointment.start_time)
-            .offset(offset)
-            .limit(limit)
-            .all()
-        )
+        return self._list_by_owner(Appointment.patient_id, patient_id, status_filter, offset, limit)
 
     def list_for_provider(
         self,
@@ -88,7 +80,17 @@ class AppointmentRepository:
         offset: int = 0,
         limit: int = 20,
     ) -> list[Appointment]:
-        query = self.db.query(Appointment).filter(Appointment.provider_id == provider_id)
+        return self._list_by_owner(Appointment.provider_id, provider_id, status_filter, offset, limit)
+
+    def _list_by_owner(
+        self,
+        owner_column,
+        owner_id: uuid.UUID,
+        status_filter: AppointmentStatus | None,
+        offset: int,
+        limit: int,
+    ) -> list[Appointment]:
+        query = self.db.query(Appointment).filter(owner_column == owner_id)
         if status_filter is not None:
             query = query.filter(Appointment.status == status_filter.value)
         return (
@@ -147,6 +149,10 @@ class AppointmentRepository:
                 f"{appointment.provider_id}"
             ) from exc
 
+        # from_status == to_status here is intentional: rescheduling doesn't
+        # change lifecycle status, but still needs an audit row (NFR-018), so
+        # the unchanged status is recorded on both sides as the reschedule
+        # event marker rather than a real transition.
         history = AppointmentStatusHistory(
             appointment_id=appointment.id,
             from_status=appointment.status,

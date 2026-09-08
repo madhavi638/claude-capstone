@@ -26,9 +26,20 @@ from backend.services.appointment_service import AppointmentService
 
 router = APIRouter(prefix="/api/v1/appointments", tags=["appointments"])
 
+_ERROR_STATUS_MAP = {
+    SlotConflictError: status.HTTP_409_CONFLICT,
+    InvalidStatusTransitionError: status.HTTP_409_CONFLICT,
+    AuthorizationError: status.HTTP_403_FORBIDDEN,
+    NotFoundError: status.HTTP_404_NOT_FOUND,
+}
+
 
 def _service(db: Session = Depends(get_db)) -> AppointmentService:
     return AppointmentService(db)
+
+
+def _as_http_error(exc: Exception) -> HTTPException:
+    return HTTPException(status_code=_ERROR_STATUS_MAP[type(exc)], detail=str(exc))
 
 
 @router.post("", response_model=AppointmentResponse, status_code=status.HTTP_201_CREATED)
@@ -41,10 +52,8 @@ def book_appointment(
         return service.book_appointment(
             principal, body.patient_id, body.provider_id, body.start_time, body.end_time
         )
-    except SlotConflictError as exc:
-        raise HTTPException(status_code=status.HTTP_409_CONFLICT, detail=str(exc))
-    except AuthorizationError as exc:
-        raise HTTPException(status_code=status.HTTP_403_FORBIDDEN, detail=str(exc))
+    except (SlotConflictError, AuthorizationError) as exc:
+        raise _as_http_error(exc)
 
 
 @router.get("/{appointment_id}", response_model=AppointmentResponse)
@@ -55,10 +64,8 @@ def get_appointment(
 ):
     try:
         return service.get_appointment(principal, appointment_id)
-    except AuthorizationError as exc:
-        raise HTTPException(status_code=status.HTTP_403_FORBIDDEN, detail=str(exc))
-    except NotFoundError as exc:
-        raise HTTPException(status_code=status.HTTP_404_NOT_FOUND, detail=str(exc))
+    except (AuthorizationError, NotFoundError) as exc:
+        raise _as_http_error(exc)
 
 
 @router.get("", response_model=AppointmentListResponse)
@@ -82,7 +89,7 @@ def list_appointments(
         else:
             items = service.list_for_provider(principal, provider_id, status_filter, offset, page_size)
     except AuthorizationError as exc:
-        raise HTTPException(status_code=status.HTTP_403_FORBIDDEN, detail=str(exc))
+        raise _as_http_error(exc)
 
     return AppointmentListResponse(items=items, page_size=page_size, offset=offset)
 
@@ -96,14 +103,8 @@ def reschedule_appointment(
 ):
     try:
         return service.reschedule_appointment(principal, appointment_id, body.start_time, body.end_time)
-    except SlotConflictError as exc:
-        raise HTTPException(status_code=status.HTTP_409_CONFLICT, detail=str(exc))
-    except InvalidStatusTransitionError as exc:
-        raise HTTPException(status_code=status.HTTP_409_CONFLICT, detail=str(exc))
-    except AuthorizationError as exc:
-        raise HTTPException(status_code=status.HTTP_403_FORBIDDEN, detail=str(exc))
-    except NotFoundError as exc:
-        raise HTTPException(status_code=status.HTTP_404_NOT_FOUND, detail=str(exc))
+    except (SlotConflictError, InvalidStatusTransitionError, AuthorizationError, NotFoundError) as exc:
+        raise _as_http_error(exc)
 
 
 @router.post("/{appointment_id}/cancel", response_model=AppointmentResponse)
@@ -115,12 +116,8 @@ def cancel_appointment(
 ):
     try:
         return service.cancel_appointment(principal, appointment_id, body.reason)
-    except InvalidStatusTransitionError as exc:
-        raise HTTPException(status_code=status.HTTP_409_CONFLICT, detail=str(exc))
-    except AuthorizationError as exc:
-        raise HTTPException(status_code=status.HTTP_403_FORBIDDEN, detail=str(exc))
-    except NotFoundError as exc:
-        raise HTTPException(status_code=status.HTTP_404_NOT_FOUND, detail=str(exc))
+    except (InvalidStatusTransitionError, AuthorizationError, NotFoundError) as exc:
+        raise _as_http_error(exc)
 
 
 @router.get("/{appointment_id}/history", response_model=list[AppointmentStatusHistoryResponse])
@@ -131,7 +128,5 @@ def get_appointment_history(
 ):
     try:
         return service.get_history(principal, appointment_id)
-    except AuthorizationError as exc:
-        raise HTTPException(status_code=status.HTTP_403_FORBIDDEN, detail=str(exc))
-    except NotFoundError as exc:
-        raise HTTPException(status_code=status.HTTP_404_NOT_FOUND, detail=str(exc))
+    except (AuthorizationError, NotFoundError) as exc:
+        raise _as_http_error(exc)
