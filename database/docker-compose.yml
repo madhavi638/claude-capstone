@@ -1,0 +1,25 @@
+version: "3.9"
+
+services:
+  hms6-postgres:
+    image: postgres:16-alpine
+    container_name: hms6-appointments-db
+    restart: unless-stopped
+    environment:
+      POSTGRES_USER: ${HMS6_DB_USER:-hms6_user}
+      POSTGRES_PASSWORD: ${HMS6_DB_PASSWORD:-changeme}
+      POSTGRES_DB: ${HMS6_DB_NAME:-hms6_appointments}
+    ports:
+      - "${HMS6_DB_PORT:-5432}:5432"
+    volumes:
+      - hms6_postgres_data:/var/lib/postgresql/data
+      - ./schema.sql:/docker-entrypoint-initdb.d/01_schema.sql:ro
+      - ./seed_data.sql:/docker-entrypoint-initdb.d/02_seed_data.sql:ro
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U ${HMS6_DB_USER:-hms6_user} -d ${HMS6_DB_NAME:-hms6_appointments}"]
+      interval: 5s
+      timeout: 5s
+      retries: 10
+
+volumes:
+  hms6_postgres_data:

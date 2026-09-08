@@ -1,0 +1,10 @@
+env/
+.pytest_cache/
+.codemie/
+__pycache__/
+*.pyc
+.venv/
+venv/
+node_modules/
+*.egg-info/
+.DS_Store
