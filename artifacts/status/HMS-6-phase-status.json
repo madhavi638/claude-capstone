@@ -1,6 +1,6 @@
 {
   "ticket_id": "HMS-6",
-  "current_phase": "phase_8_verification",
+  "current_phase": "phase_9_pull_request",
   "completed_phases": [
     "phase_1_requirements",
     "phase_2_architecture",
@@ -9,10 +9,10 @@
     "phase_5_implementation_planning",
     "phase_6_implementation_execution",
     "phase_7_code_review",
-    "phase_8_verification"
+    "phase_8_verification",
+    "phase_9_pull_request"
   ],
   "pending_phases": [
-    "phase_9_pull_request",
     "phase_10_simplification"
   ],
   "artifacts": {
@@ -43,7 +43,12 @@
       "tests/**"
     ],
     "phase_7_code_review": "artifacts/review/HMS-6-review-notes.md",
-    "phase_8_verification": "artifacts/verification/HMS-6-verification-report.md"
+    "phase_8_verification": "artifacts/verification/HMS-6-verification-report.md",
+    "phase_9_pull_request": [
+      "artifacts/pr/HMS-6-pull-request.md",
+      "artifacts/pr/HMS-6-pr-metadata.json",
+      "https://github.com/madhavi638/claude-capstone/pull/1"
+    ]
   },
   "approval_status": "APPROVAL_PENDING",
   "workflow_status": "IN_PROGRESS",
@@ -57,6 +62,7 @@
     "Continuation session (2026-09-08): resumed at Phase 7 approval gate. On inspection, found source_code/backend already contained fixes for all Critical/High/Medium findings (file mtimes ~14:09-14:21 on 2026-08-31, after the review and status file were written) — the remediation had happened but this status file was never updated to reflect it. Verified each fix by reading the actual code (BR-011 status guard, split _authorize_write_new/_authorize_write_existing for BR-010, start_time<end_time validators, NotFoundError, dispatcher SELECT...FOR UPDATE SKIP LOCKED) rather than trusting the stale record.",
     "User selected 'Remediate Critical + High now' when asked how to proceed. Added 5 regression tests to tests/integration/test_appointment_service.py covering BR-011 (reschedule of CANCELLED/COMPLETED) and BR-010 (provider blocked from book/reschedule/cancel). Re-ran unit tests: 44/44 pass. Integration suite (now 24 tests) statically verified to collect/import cleanly via pytest --collect-only, but still NOT executable in this sandbox — same pre-existing blocker (no Docker; local Postgres:5432 is an unrelated instance, auth fails for hms6_user). Testing Gap #4 (malformed time-range test) not added — tracked as non-blocking residual.",
     "Phase 7 revised result: APPROVED. artifacts/review/HMS-6-review-notes.md updated with a Remediation Addendum documenting all fixes and their verification status. Action items for Critical/High/Medium now checked off; malformed-time-range test and the pre-existing auth-stub risk (TASK-003, unchanged) remain as tracked non-blocking follow-ups. User approved proceeding to Phase 8.",
-    "Phase 8 (Verification) complete. Built full FR/NFR/BR traceability matrix in artifacts/verification/HMS-6-verification-report.md. Result: PASS WITH RISKS. All 15 requirements have at least partial coverage; 11 fully covered. Newly identified during this phase (not flagged in any earlier phase): FR-020's requirement text names date-range filtering but no such query parameter exists anywhere in the router/service/repository (grep-confirmed) — tracked as a Partial/gap, not blocking. FR-021/BR-013 notification delivery remains an explicit stub (enqueue mechanism is solid; no real send channel), consistent with the problem spec's own stated constraint. NFR-001 (performance) has no load test. Largest carried-forward risk: the full 24-test integration suite still cannot execute in this sandbox (no Docker; local Postgres:5432 belongs to an unrelated project) — confirmed again this phase. Unit tests (44/44) re-run and pass. Awaiting user approval to proceed to Phase 9 (Pull Request)."
+    "Phase 8 (Verification) complete. Built full FR/NFR/BR traceability matrix in artifacts/verification/HMS-6-verification-report.md. Result: PASS WITH RISKS. All 15 requirements have at least partial coverage; 11 fully covered. Newly identified during this phase (not flagged in any earlier phase): FR-020's requirement text names date-range filtering but no such query parameter exists anywhere in the router/service/repository (grep-confirmed) — tracked as a Partial/gap, not blocking. FR-021/BR-013 notification delivery remains an explicit stub (enqueue mechanism is solid; no real send channel), consistent with the problem spec's own stated constraint. NFR-001 (performance) has no load test. Largest carried-forward risk: the full 24-test integration suite still cannot execute in this sandbox (no Docker; local Postgres:5432 belongs to an unrelated project) — confirmed again this phase. Unit tests (44/44) re-run and pass. User approved proceeding to Phase 9 (Pull Request).",
+    "Phase 9 (Pull Request) complete. Pre-conditions required adaptation: workspace was not a git repository (initialized fresh via 'git init -b feature/HMS-6'); env/github.env did not exist — used env/git.env instead (GITHUB_USERNAME, GITHUB_TOKEN, GITHUB_REPO; GITHUB_OWNER/GITHUB_REPOSITORY/GITHUB_BASE_BRANCH were not supplied under either filename). GitHub API confirmed push access to madhavi638/claude-capstone. Discovered the repo's only/default branch (feature/docs-sync) already holds an unrelated capstone project (STLC-Capstone, ticket SC-1) — user confirmed proceeding in this repo. Committed HMS-6 (72 files, env/ and secrets excluded via .gitignore) as a new root branch feature/HMS-6, merged feature/docs-sync into it with --allow-unrelated-histories (only conflict: .gitignore, resolved by combining both rule sets) so GitHub could diff the PR, then pushed. Created PR #1 (https://github.com/madhavi638/claude-capstone/pull/1) targeting feature/docs-sync via gh CLI. Wrote artifacts/pr/HMS-6-pull-request.md and artifacts/pr/HMS-6-pr-metadata.json documenting the PR and the deviations from the standard Phase 9 configuration (base branch, credentials source, unrelated-history merge). Awaiting user approval to proceed to Phase 10 (Simplification)."
   ]
 }
