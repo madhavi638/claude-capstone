@@ -1,0 +1,16 @@
+{
+  "ticket_id": "HMS-6",
+  "pr_number": 1,
+  "pr_url": "https://github.com/madhavi638/claude-capstone/pull/1",
+  "repository": "madhavi638/claude-capstone",
+  "source_branch": "feature/HMS-6",
+  "target_branch": "feature/docs-sync",
+  "state": "OPEN",
+  "created_at": "2026-09-08T07:53:28Z",
+  "title": "HMS-6: Appointment Scheduling Feature Implementation",
+  "notes": [
+    "Target branch is feature/docs-sync, not main — this is the repository's actual default branch; no main branch exists in madhavi638/claude-capstone.",
+    "Repository already contained an unrelated capstone project (STLC-Capstone, ticket SC-1) on feature/docs-sync. feature/HMS-6 was created as a new root (orphan) branch, then merged with feature/docs-sync using --allow-unrelated-histories solely to give GitHub a common ancestor for the PR diff — this added the existing STLC content into the HMS-6 branch's history but did not modify any of it.",
+    "env/git.env (GITHUB_USERNAME, GITHUB_TOKEN, GITHUB_REPO) was used in place of the orchestrator spec's expected env/github.env (GITHUB_USERNAME, GITHUB_OWNER, GITHUB_REPOSITORY, GITHUB_BASE_BRANCH, GITHUB_TOKEN) — GITHUB_USERNAME doubled as owner, GITHUB_REPO as repository name, and the base branch was taken from the repo's actual default branch since GITHUB_BASE_BRANCH was not supplied."
+  ]
+}

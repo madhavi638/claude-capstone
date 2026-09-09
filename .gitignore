@@ -9,3 +9,6 @@ secrets/
 *.key
 *.pem
 *.pfx
+.codemie/
+*.egg-info/
+.DS_Store
